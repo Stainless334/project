@@ -1,47 +1,5 @@
-"""
+import json
 
-Expense_1 = {
-    "Name": "School fees",
-    "Amount": 35000,
-    "Category": "Children"
-}
-Expense_2 = {
-    "Name": "Lunch",
-    "Amount": 2500,
-    "Category": "Food"
-}
-
-
-the_list = [Expense_1, Expense_2]
-
-
-        # ADD EXPENSE
-print("Enter name of expense.")
-name = input()
-
-print("What is the amount?")
-amount = input()
-
-print("Enter expense category.")
-cat = input()
-
-Expense_n = {
-    "Name": name,
-    "Amount": float(amount),
-    "Category": cat
-}
-the_list.append(Expense_n)
-
-for view in (the_list):
-    print(*view.values())
-  
-  # VIEW TOTAL
-total_amount = 0
-for total in the_list:
-    total_amount += total["Amount"]
-
-print(total_amount)
-"""
 Expense_1 = {
     "Name": "School fees",
     "Amount": 35000,
@@ -66,9 +24,12 @@ while ans != 6:
     5. Delete expense
     6. Exit
     """)
+    #if ans != int:   print("Please write only numbers")
+
     ans = int(input("Write a number here: "))
+    
     if ans == 6:
-        print("See you next time.")
+        print("See you next time!")
         break
     elif ans == 1:
         print("Please fill the following info before you proceed")
@@ -87,21 +48,30 @@ while ans != 6:
         for exp in expenses:
             print(exp["Name"], exp["Amount"], exp["Category"])
     elif ans == 3:
-        #total_amount = 0
-        #for total in expenses:
-            print("Total Expenses: ")
-            total_amount = sum(total["Amount"] for total in expenses)
-            print(total_amount)
+        if expenses == []:
+            print("No Expenses added yet.")
+        print("Total Expenses: ")
+        total_amount = sum(total["Amount"] for total in expenses)
+        print(total_amount)
     elif ans == 4:
         search = (input("Search Category: "))
         for see in expenses:
             if search == see["Category"]:
-                print(see)
+                print(f"Expense Found!: {see["Name"], see["Amount"], see["Category"]}")
     elif ans == 5:
-        print("Choose an Expense name")
+        print("Choose a number from the following ")
         
-
-
-
+        for crop in range(len(expenses)):
+            print(f"{crop + 1}. {expenses[crop]["Name"]}")
+        rem = int(input(">>> "))
+        if rem > len(expenses):
+            print("Invalid Option!")
+            continue
+        rem = rem - 1
+        expenses.pop(rem)
+        print("Deleted!")
+        print("Check the ('View expence') option for the updeted Expenses")
+    else:
+        print("Invalid option!")
+        print("Please choose between 1 and 6.")
         
-    
