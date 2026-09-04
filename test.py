@@ -48,3 +48,19 @@ print(total_amount)
           #  if rem == ex:
            #total_amount = 0
         #for total in expenses:
+"""
+Expense_1 = {
+    "Name": "School fees",
+    "Amount": 35000,
+    "Category": "Children"
+}
+Expense_2 = {
+    "Name": "Lunch",
+    "Amount": 2500,
+    "Category": "Food"
+}
+"""
+
+#expenses = []
+#expenses.append(Expense_1)
+#expenses.append(Expense_2)
