@@ -32,8 +32,19 @@ while ans != 6:
     elif ans == 1:
         print("Please fill the following info before you proceed")
         name = input("Enter expense name: ").capitalize()
-        amount = float(input("Enter the amount: "))
+        if name == " " or len(name) <= 0 or type(name) == float or int:
+            print("Please enter a valid expense name.")
+            continue
+        amount = (input("Enter the amount: "))
+        try:
+            amount = float(amount)
+        except ValueError:
+            print("Invalid input, write a number.")
+            continue
         category = input("Enter the category: ").capitalize()
+        if category == " " or len(category) <= 0 or type(name) == float or int:
+            print("Invalid Input.")
+            continue
         Expense_3 = {
             "Name": name,
             "Amount": amount,
@@ -45,11 +56,11 @@ while ans != 6:
             save_file = json.dump(expenses, save_file)
     elif ans == 2:
         if expenses == []:
-            print("You have an empty list.")
+            print("No expense added yet.")
         else:
             print("Your expenses:")
             for exp in expenses:
-                print(exp["Name"], exp["Amount"], exp["Category"])
+                print(f"${exp["Amount"]} was spent on '{exp["Name"]}' in the '{exp["Category"]}' category.")
     elif ans == 3:
         if expenses == []:
             print("No Expenses added yet.")
@@ -58,18 +69,26 @@ while ans != 6:
             total_amount = sum(total["Amount"] for total in expenses)
             print(f"${total_amount} only.")
     elif ans == 4:
-        search = (input("Search Category: ")).capitalize()
+        search = (input("Enter the Category: ")).capitalize()
+        if expenses == []:
+            print("No expense added yet")
         for see in expenses:
             if search == see["Category"]:
                 print(f"Expense Found!: {see["Name"], see["Amount"], see["Category"]}")
-            else:
-                print(f"{search} was not found in your expenses.")
+                continue
+            elif search != see["Category"]:
+                print("Not Found!")
     elif ans == 5:
         print("Choose a number from the following ")
         
         for crop in range(len(expenses)):
             print(f"{crop + 1}. {expenses[crop]["Name"]}")
-        rem = int(input(">>> "))
+        rem = (input(">>> "))
+        try:
+            rem = int(rem)
+        except ValueError:
+                print("Invalid Input!")
+                continue
         if rem > len(expenses):
             print("Invalid Option!")
             continue
