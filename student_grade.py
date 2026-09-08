@@ -6,18 +6,18 @@ def greet(name):
 
 def GetGrade():
     container = []
-    get = (input("Enter the number of grades you need: "))
-    try:
-        get = int(get)
-    except (ValueError, ZeroDivisionError, TypeError):
-        print ("Please enter a valid digit")
+    
+    
+    get = int(input("Enter the number of grades you need: "))
+
     for ex in range(get):
-        obt = int(input(f"grade {ex + 1}: "))
+        if get <= 0:
+            return None
+        else:
+            obt = int(input(f"grade {ex + 1}: "))
         container.append(obt)
     return container
        
-        
-        
 
 def grade_average():
     gets = GetGrade()
@@ -45,6 +45,4 @@ def grade():
 welcome()
 print(greet("John"))
 print(grade())
-
-
 

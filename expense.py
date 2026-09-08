@@ -32,7 +32,7 @@ while ans != 6:
     elif ans == 1:
         print("Please fill the following info before you proceed")
         name = input("Enter expense name: ").capitalize()
-        if name == " " or len(name) <= 0 or type(name) == float or int:
+        if name == " " or len(name) <= 2 or type(name) == float or int:
             print("Please enter a valid expense name.")
             continue
         amount = (input("Enter the amount: "))
