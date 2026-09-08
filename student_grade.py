@@ -5,15 +5,27 @@ def greet(name):
     return f"Welcome to the program {name}."
 
 def GetGrade():
-    get = int(input("Enter the number of grades you need: "))
+    container = []
+    get = (input("Enter the number of grades you need: "))
+    try:
+        get = int(get)
+    except (ValueError, ZeroDivisionError, TypeError):
+        print ("Please enter a valid digit")
     for ex in range(get):
-        print(f"grade {ex + 1}")
+        obt = int(input(f"grade {ex + 1}: "))
+        container.append(obt)
+    return container
+       
+        
+        
 
-def grade_average(grade):
-    grade = round(sum(grade) / len(grade), 2)
+def grade_average():
+    gets = GetGrade()
+    
+    grade = round(sum(gets) / len(gets), 2)
     return grade
 def grade():
-    score = grade_average([31, 27, 62, 56, 60, 41, 11, 34])
+    score = grade_average()
     if 100 >= score >= 90:
         return("A")
     elif 89 >= score >= 80:
@@ -33,6 +45,6 @@ def grade():
 welcome()
 print(greet("John"))
 print(grade())
-GetGrade()
+
 
 
