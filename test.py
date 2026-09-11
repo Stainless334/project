@@ -64,3 +64,19 @@ Expense_2 = {
 #expenses = []
 #expenses.append(Expense_1)
 #expenses.append(Expense_2)
+
+
+"""if ans == "A":
+                
+                    a == 0
+            elif ans == "B":
+                for b in range(len(display["Option"])):
+                    b == 1
+            elif ans == "C":
+                for c in range(len(display["Option"])):
+                    c == 2
+            elif ans == "D":
+                for d in range(len(display["Option"])):
+                    d == 3
+                    
+"""

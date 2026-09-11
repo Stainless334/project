@@ -13,36 +13,51 @@ quiz_3 = {
         "Option": ("Python", "Golang", "Java", "Javascript"),
         "Ans": "Python"
 }
+
 question = [quiz, quiz_2, quiz_3]
 
 def RunQuiz():
     rep = "Yes"
     while rep == "Yes":
         score = 0
-        for display in (question):
-            print(display["Quest"])
-            for ex in range(len(display["Option"])):
-                print(f"{chr(65 + ex)}. {(display["Option"])[ex]}")
-            ans = input("Your answer: ").capitalize()
-            for check in range(len(question)):
-                for cross in 
-                if (ord(ans) - 65) == check  and  check == check:
+        while True:
+        
+            for display in (question):
+                print(f"Question. {display["Quest"]}")
+                for ex in range(len(display["Option"])):
+                    print(f"{chr(65 + ex)}. {(display["Option"])[ex]}")
+                ans = input("Your answer: ").capitalize()
 
-                
+                if ans == "A":
+                    an = 0
+                elif ans == "B":
+                    an = 1
+                elif ans == "C":
+                    an = 2
+                elif ans == "D":
+                    an = 3
+                else :
+                    print("Invalid Input!!")
+                    print("Please choose options from 'A to D'.")
+                    print(f"\n")
+
+                selected = (display["Option"])[an]
+                if selected == (display["Ans"]):
                     score += 1
                     print("Correct!!!")
                 else:
                     print("Wrong!")
-                    print(f"The correct answer is {display["Ans"]}.")
-        print(f"{score} / {len(question)}")
-        replay = input("Would you like to replay the quiz?: ").capitalize()
-        if rep == replay:
-            print("Alright!")
-            continue
-        elif replay == "No":
-            print("Thank you for playing!!")
-            break
-        else:
-            print("Invalid Option")
-            break
-(RunQuiz())
+                    print(f"The correct answer is  {display["Ans"]}.")
+                    print(f"\n")
+            print(f" Your result is {score} / {len(question)}!")
+            replay = input("Would you like to replay the quiz?: ").capitalize()
+            if rep == replay:
+                print("Alright!")
+                continue
+            elif replay == "No":
+                print("Thank you for playing!!")
+                break
+            else:
+                print("Invalid Option")
+                break
+RunQuiz()
