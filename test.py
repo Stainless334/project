@@ -80,3 +80,4 @@ Expense_2 = {
                     d == 3
                     
 """
+"ur-line report with labels Customer, Subtotal, Tax, and Total. Round subtotal, tax, and total to 2 decimal places."
