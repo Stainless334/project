@@ -81,3 +81,11 @@ Expense_2 = {
                     
 """
 "ur-line report with labels Customer, Subtotal, Tax, and Total. Round subtotal, tax, and total to 2 decimal places."
+
+
+"""fruits = ["Orange", "Apple", "Cherry"]
+for i, one in enumerate(fruits):
+    print(f"{i + 1} {one}")
+   """
+
+print(ord("a")) 
