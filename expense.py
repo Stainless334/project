@@ -21,7 +21,7 @@ while ans != 6:
     5. Delete expense
     6. Exit
     """)
-    ans = (input("Write a number here: ")).capitalize()
+    ans = (input("Write a number here: ")).capitalize().strip()
     try:
         ans = int(ans)
     except ValueError:
@@ -31,15 +31,25 @@ while ans != 6:
         break
     elif ans == 1:
         print("Please fill the following info before you proceed")
-        name = input("Enter expense name: ").capitalize()
-        
-        amount = (input("Enter the amount: "))
-        try:
-            amount = float(amount)
-        except ValueError:
-            print("Invalid input, write a number.")
-            continue
-        category = input("Enter the category: ").capitalize()
+        name = input("Enter expense name: ").capitalize().strip()
+        while len(name) < 2 or name.isdigit():
+            print("Invalid name! Please try again.")
+            name = input("Enter expense name: ").capitalize().strip()
+
+        bill = True
+        while bill == True:
+            amount = (input("Enter the amount: "))
+            try:
+                amount = float(amount)
+                bill = False
+            except ValueError:
+                print("Invalid input, write a number.")
+                
+        category = input("Enter the category: ").capitalize().strip()
+        while  len(category) < 2 or name.isdigit():
+            print("Invalid input! Please try again.")
+            category = input("Enter the category: ").capitalize().strip()
+
         
         Expense_3 = {
             "Name": name,

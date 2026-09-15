@@ -41,14 +41,9 @@ for total in the_list:
     total_amount += total["Amount"]
 
 print(total_amount)
-"""
-       #rem = int(input("Choose the number you want to delete: "))
-       # rem = rem - 1
-      #  for ex in range(len(expenses)):
-          #  if rem == ex:
-           #total_amount = 0
-        #for total in expenses:
-"""
+
+expenses:
+
 Expense_1 = {
     "Name": "School fees",
     "Amount": 35000,
@@ -61,9 +56,7 @@ Expense_2 = {
 }
 """
 
-#expenses = []
-#expenses.append(Expense_1)
-#expenses.append(Expense_2)
+
 
 
 """if ans == "A":
@@ -86,6 +79,20 @@ Expense_2 = {
 """fruits = ["Orange", "Apple", "Cherry"]
 for i, one in enumerate(fruits):
     print(f"{i + 1} {one}")
-   """
+   
 
-print(ord("a")) 
+print(ord("a"))  #rem = int(input("Choose the number you want to delete: "))
+       # rem = rem - 1
+      #  for ex in range(len(expenses)):
+          #  if rem == ex:
+           #total_amount = 0
+        #for total in 
+        # 
+        # 
+        # 
+        # #print(f"Final score: {score}/{len(question)}")
+                #print(percent)
+                #print(message)
+                #
+                
+                """
