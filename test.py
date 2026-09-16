@@ -1,3 +1,4 @@
+import time
 """
 
 Expense_1 = {
@@ -96,3 +97,5 @@ print(ord("a"))  #rem = int(input("Choose the number you want to delete: "))
                 #
                 
                 """
+a = time.localtime()
+print(a)

@@ -1,3 +1,4 @@
+import time
 import random
 quiz = {
         "Quest": "What is the capital of France?",
@@ -182,20 +183,15 @@ quiz_30 = {
 question = [quiz, quiz_2, quiz_3, quiz_4, quiz_5, quiz_6, quiz_7, quiz_8, quiz_9, quiz_10, quiz_11, quiz_12, quiz_13, quiz_14, quiz_15, quiz_16, quiz_17, quiz_18, quiz_19, quiz_20, quiz_21, quiz_22, quiz_23, quiz_24, quiz_25, quiz_26, quiz_27, quiz_28, quiz_29, quiz_30]
 rep = "Yes"
 while rep == "Yes":
-    difficulty = input("Choose a difficulty level (Easy, Medium, Hard): ").strip().capitalize()
-    while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
-        print("Invalid input!")
-        print("Please choose either 'Easy', 'Medium' or 'Hard'.")
-        difficulty = input("Try again: ").strip().capitalize()
-    filter_question = [q for q in question if q["Difficulty"] == difficulty]
+    
 
     def RunQuiz():
 
 
 
 
-
-
+            global filter_question
+            filter_question = FilterQuiz()
             random.shuffle(filter_question)
             score = SolveQuestion(filter_question)
 
@@ -204,9 +200,25 @@ while rep == "Yes":
 
             FinalResult(score, len(filter_question), percent, message)
 
-
+    def FilterQuiz():
+        difficulty = input("Choose a difficulty level (Easy, Medium, Hard): ").strip().capitalize()
+        while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
+            print("Invalid input!")
+            print("Please choose either 'Easy', 'Medium' or 'Hard'.")
+            difficulty = input("Try again: ").strip().capitalize()
+        filter_question = [q for q in question if q["Difficulty"] == difficulty]
+        while len(filter_question) == 0:
+            print(f"No questions available for {difficulty} difficulty.")
+            difficulty = input("Choose a different difficulty level (Easy, Medium, Hard): ").strip().capitalize()
+            while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
+                print("Invalid input!")
+                print("Please choose either 'Easy', 'Medium' or 'Hard'.")
+                difficulty = input("Try again: ").strip().capitalize()
+            filter_question = [q for q in question if q["Difficulty"] == difficulty]
+        return filter_question
             
     def AskQuestion(i, display):
+        start_time = time.time()
         print(f"Question: {i + 1}/{len(filter_question)}")
         print(f"{display["Quest"]}")
         options = list(display["Option"])
@@ -220,7 +232,8 @@ while rep == "Yes":
             print("Invalid Input!!")
             print("Please choose options from 'A to D'.")
             ans = input("Try again: ").strip().capitalize()
-
+        end_time = time.time()
+        time_taken = end_time - start_time
         if ans == "A":
             ans = 0
         elif ans == "B":
@@ -229,7 +242,7 @@ while rep == "Yes":
             ans = 2
         elif ans == "D":
             ans = 3
-
+        print(f"Time taken: {time_taken:.2f} seconds")
         selected = (options)[ans]
         if selected == (display["Ans"]):
 
