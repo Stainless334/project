@@ -89,108 +89,208 @@ quiz_15 = {
     "Ans": "Blue Whale",
     "Difficulty": "Easy"
 }
+quiz_16 = {
+    "Quest": "When a brick is taken from the earth's surface to the moon, its mass will",
+    "Option": ("Increase", "Decrease", "Remain constant", "become zero"),
+    "Ans": "Remain constant",
+    "Difficulty": "Medium"
+}
+quiz_17 = {
+    "Quest": "A simple machine with an efficiency of 75% lifts a load of 5000 N when a force of 500 N is applied to it. Calculate the velocity ratio of the machine.",
+    "Option": ("13.3", "17.5", "25.0", "10.0"),
+    "Ans": "13.3",
+    "Difficulty": "Hard"
+}
+quiz_18 = {
+    "Quest": "What is the fastest land animal in the world?",
+    "Option": ("Cheetah", "Lion", "Horse", "Tiger"),
+    "Ans": "Cheetah",
+    "Difficulty": "Easy"
+}
+quiz_19 = {
+    "Quest": "Which gas is most abundant in the Earth's atmosphere?",
+    "Option": ("Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"),
+    "Ans": "Nitrogen",
+    "Difficulty": "Easy"
+}
+quiz_20 = {
+    "Quest": "What is the largest ocean on Earth?",
+    "Option": ("Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"),
+    "Ans": "Pacific Ocean",
+    "Difficulty": "Easy"
+}
+quiz_21 = {
+    "Quest": "If a sound wave goes from a cold-air region to a hot-air region, its wavelength",
+    "Option": ("Increases", "Decreases", "Remains constant", "Decreases then increases"),
+    "Ans": "Increases",
+    "Difficulty": "Medium"
+}
+quiz_22 = {
+    "Quest": "The vibration of an air column produces the sound in the",
+    "Option": ("piano", "guitar", "flute", "school hand bell"),
+    "Ans": "flute",
+    "Difficulty": "Medium"
+}
+quiz_23 = {
+    "Quest": "Echo CANNOT be used for",
+    "Option": ("medical ultrasound", "operations of fibre optic cables", "oil prospecting", "detecting flaws in metal casting"),
+    "Ans": "operations of fibre optic cables",
+    "Difficulty": "Hard"
+}
+quiz_24 = {
+    "Quest": "In which of the following material media would sound travel faster?",
+    "Option": ("Metal", "Water", "Oil", "Gas"),
+    "Ans": "Metal",
+    "Difficulty": "Medium"
+}
+quiz_25 = {
+    "Quest": "The velocity of sound in air will be doubled if its absolute temperature is",
+    "Option": ("doubled", "halved", "quadrupled", "constant"),
+    "Ans": "quadrupled",
+    "Difficulty": "Hard"
+}
+quiz_26 = {
+    "Quest": "The most suitable substance for putting out petrol fire is",
+    "Option": ("Water", "Sand", "Fire blanket", "Carbon(IV)oxide"),
+    "Ans": "Carbon(IV)oxide",
+    "Difficulty": "Medium"
+}
+quiz_27 = {
+    "Quest": "Diamond does not conduct electricity because it",
+    "Option": ("has no free valence electrons", "is a giant molecule", "contains no bonded electrons", "is a solid at room temperature"),
+    "Ans": "has no free valence electrons",
+    "Difficulty": "Hard"
+}
+quiz_28 = {
+    "Quest": "Methanol is obtained from wood by",
+    "Option": ("combustion", "esterification", "destructive distillation", "bacterial decomposition"),
+    "Ans": "destructive distillation",
+    "Difficulty": "Hard"
+}
+quiz_29 = {
+    "Quest": "The alloy used for metal work and plumbing contains",
+    "Option": ("lead and tin", "copper and tin", "aluminium and copper", "iron and carbon"),
+    "Ans": "lead and tin",
+    "Difficulty": "Hard"
+}
+quiz_30 = {
+    "Quest": "Which of the following halogens is solid at room temperature?",
+    "Option": ("Chlorine", "Bromine", "Iodine", "Fluorine"),
+    "Ans": "Iodine",
+    "Difficulty": "Medium"
+}
+question = [quiz, quiz_2, quiz_3, quiz_4, quiz_5, quiz_6, quiz_7, quiz_8, quiz_9, quiz_10, quiz_11, quiz_12, quiz_13, quiz_14, quiz_15, quiz_16, quiz_17, quiz_18, quiz_19, quiz_20, quiz_21, quiz_22, quiz_23, quiz_24, quiz_25, quiz_26, quiz_27, quiz_28, quiz_29, quiz_30]
+rep = "Yes"
+while rep == "Yes":
+    difficulty = input("Choose a difficulty level (Easy, Medium, Hard): ").strip().capitalize()
+    while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
+        print("Invalid input!")
+        print("Please choose either 'Easy', 'Medium' or 'Hard'.")
+        difficulty = input("Try again: ").strip().capitalize()
+    filter_question = [q for q in question if q["Difficulty"] == difficulty]
 
-question = [quiz, quiz_2, quiz_3, quiz_4, quiz_5, quiz_6, quiz_7, quiz_8, quiz_9, quiz_10, quiz_11, quiz_12, quiz_13, quiz_14, quiz_15]
+    def RunQuiz():
 
-def RunQuiz():
-    rep = "Yes"
-    while rep == "Yes":
-        
 
-        random.shuffle(question)
-        score = SolveQuestion(question)
-        
-        percent = CalcPercentage(score)
-        message = Performance(percent)
 
-        FinalResult(score, len(question), percent, message)
-        
+
+
+
+            random.shuffle(filter_question)
+            score = SolveQuestion(filter_question)
+
+            percent = CalcPercentage(score)
+            message = Performance(percent)
+
+            FinalResult(score, len(filter_question), percent, message)
+
+
+            
+    def AskQuestion(i, display):
+        print(f"Question: {i + 1}/{len(filter_question)}")
+        print(f"{display["Quest"]}")
+        options = list(display["Option"])
+        random.shuffle(options)
+        for ex, opt in enumerate(options):
+            print(f"{chr(65 + ex)}. {opt}")
+
+        ans = input("Your answer: ").strip().capitalize()
+        while ans != "A" and ans != "B" and ans != "C" and ans != "D":
+
+            print("Invalid Input!!")
+            print("Please choose options from 'A to D'.")
+            ans = input("Try again: ").strip().capitalize()
+
+        if ans == "A":
+            ans = 0
+        elif ans == "B":
+            ans = 1
+        elif ans == "C":
+            ans = 2
+        elif ans == "D":
+            ans = 3
+
+        selected = (options)[ans]
+        if selected == (display["Ans"]):
+
+            print("Correct!!!")
+            return True
+        else:
+            print("Wrong!!")
+            print(f"The correct answer is {(display["Ans"])}.")
+            return False
+
+
+    def SolveQuestion(filter_question):
+        score = 0
+        for i, display in enumerate(filter_question):
+            result = AskQuestion(i, display)
+            if result == True:
+                score += 1
+        return score
+
+
+    def CalcPercentage(score):
+        percent = round((score / len(filter_question)) * 100, 2)
+        return percent
+
+
+    def Performance(percent):
+        if 100 >= percent >= 90:
+            percent = "Excellent!"
+        elif 90 > percent >= 70:
+            percent = "Great work!"
+        elif 70 > percent >= 50:
+            percent = "Good effort!"
+        elif percent < 50:
+            percent = "Keep practicing!"
+        return percent
+
+
+    def FinalResult(score, total, percentage, message,):
+        print(f"Final Score: {score}/{total}")
+        print(percentage)
+        print(message)
+    RunQuiz()  
+    replay = input("Would you like to replay the quiz?: ").strip().capitalize()
+
+
+    while replay != "Yes" and replay != "No":
+        print("Invalid input!")
+        print("Please enter either 'Yes' or 'No'")
+        replay = input("Try again: ").strip().capitalize()
+
+    if rep == replay:
+        print("Alright!")
+        continue
+    elif replay == "No":
+        print("Thank you for playing!!")
+        break
                 
-            
-        
-            
-        replay = input("Would you like to replay the quiz?: ").capitalize().strip()
-        while replay != "Yes" and replay != "No":
-            print("Invalid input!")
-            print("Please enter either 'Yes' or 'No'")
-            replay = input("Try again: ").capitalize().strip()
-
-        if rep == replay:
-            print("Alright!")
-            continue
-        elif replay == "No":
-            print("Thank you for playing!!")
-            break
-       
-            
-def AskQuestion(i, display):
-    print(f"Question: {i + 1}/{len(question)}")
-    print(f"{display["Quest"]}")
-    options = list(display["Option"])
-    random.shuffle(options)
-    for ex, opt in enumerate(options):
-        print(f"{chr(65 + ex)}. {opt}")
-
-    ans = input("Your answer: ").capitalize().strip()
-    while ans != "A" and ans != "B" and ans != "C" and ans != "D":
-
-        print("Invalid Input!!")
-        print("Please choose options from 'A to D'.")
-        ans = input("Try again: ").capitalize().strip()
-                
-    if ans == "A":
-        ans = 0
-    elif ans == "B":
-        ans = 1
-    elif ans == "C":
-        ans = 2
-    elif ans == "D":
-        ans = 3
-               
-    selected = (options)[ans]
-    if selected == (display["Ans"]):
-        
-        print("Correct!!!")
-        return True
-    else:
-        print("Wrong!!")
-        print(f"The correct answer is {(display["Ans"])}.")
-        return False
-
-
-def SolveQuestion(question):
-    score = 0
-    for i, display in enumerate(question):
-        result = AskQuestion(i, display)
-        if result == True:
-            score += 1
-    return score
     
 
-def CalcPercentage(score):
-    percent = round((score / len(question)) * 100, 2)
-    return percent
-
-
-def Performance(percent):
-    if 100 >= percent >= 90:
-        percent = "Excellent!"
-    elif 90 > percent >= 70:
-        percent = "Great work!"
-    elif 70 > percent >= 50:
-        percent = "Good effort!"
-    elif percent < 50:
-        percent = "Keep practicing!"
-    return percent
-
-
-def FinalResult(score, total, percentage, message,):
-    print(f"Final Score: {score}/{total}")
-    print(percentage)
-    print(message)
-    
     
 
-RunQuiz()     
+#RunQuiz()     
 
 
