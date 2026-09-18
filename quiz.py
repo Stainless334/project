@@ -190,12 +190,13 @@ while rep == "Yes":
 
 
 
-            global filter_question
-            filter_question = FilterQuiz()
+            
+            filter_question, difficulty = FilterQuiz()
             random.shuffle(filter_question)
-            score = SolveQuestion(filter_question)
+            time_limit = TimeLimit(difficulty)
+            score = SolveQuestion(filter_question, time_limit)
 
-            percent = CalcPercentage(score)
+            percent = CalcPercentage(score, filter_question)
             message = Performance(percent)
 
             FinalResult(score, len(filter_question), percent, message)
@@ -215,9 +216,18 @@ while rep == "Yes":
                 print("Please choose either 'Easy', 'Medium' or 'Hard'.")
                 difficulty = input("Try again: ").strip().capitalize()
             filter_question = [q for q in question if q["Difficulty"] == difficulty]
-        return filter_question
-            
-    def AskQuestion(i, display):
+        return filter_question, difficulty
+
+    def TimeLimit(difficulty):
+        if difficulty == "Easy":
+            time_limit = 15
+        elif difficulty == "Medium":
+            time_limit = 15
+        elif difficulty == "Hard":
+            time_limit = 10
+        return time_limit
+
+    def AskQuestion(i, display, filter_question, time_limit):
         start_time = time.time()
         print(f"Question: {i + 1}/{len(filter_question)}")
         print(f"{display["Quest"]}")
@@ -242,28 +252,32 @@ while rep == "Yes":
             ans = 2
         elif ans == "D":
             ans = 3
-        print(f"Time taken: {time_taken:.2f} seconds")
+       
         selected = (options)[ans]
-        if selected == (display["Ans"]):
-
+        if selected == (display["Ans"]) and time_taken <= time_limit:
+            print(f"Time taken: {time_taken:.2f} seconds")
             print("Correct!!!")
             return True
+        elif time_taken > time_limit:
+            print("Time's up!!")
+            print(f"You are supposed to answer within {time_limit} seconds.")
+            return False
         else:
             print("Wrong!!")
             print(f"The correct answer is {(display["Ans"])}.")
             return False
 
 
-    def SolveQuestion(filter_question):
+    def SolveQuestion(filter_question, time_limit):
         score = 0
         for i, display in enumerate(filter_question):
-            result = AskQuestion(i, display)
+            result = AskQuestion(i, display, filter_question, time_limit)
             if result == True:
                 score += 1
         return score
 
 
-    def CalcPercentage(score):
+    def CalcPercentage(score, filter_question):
         percent = round((score / len(filter_question)) * 100, 2)
         return percent
 
