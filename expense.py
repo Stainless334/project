@@ -108,4 +108,5 @@ while ans != 6:
     else:
         print("Invalid option!")
         print("Please choose between 1 and 6.")
+        '''print nothing'''
     
