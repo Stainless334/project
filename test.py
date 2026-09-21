@@ -99,3 +99,4 @@ print(ord("a"))  #rem = int(input("Choose the number you want to delete: "))
                 """
 a = time.localtime()
 print(a)
+print("https://www.blender.org/wp-content/uploads/2019/07/hero_p31_screenshot-1280x720.jpg?x12104")
