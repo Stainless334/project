@@ -48,7 +48,7 @@ expenses:
 Expense_1 = {
     "Name": "School fees",
     "Amount": 35000,
-    "Category": "Children"
+    "Category": https://www.blender.org"Children"
 }
 Expense_2 = {
     "Name": "Lunch",
