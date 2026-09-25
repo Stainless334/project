@@ -1,20 +1,28 @@
-#import os
-#from openai import OpenAI
+
+def get_response(ans):
+
+   
+    
+    return response.output_text
+
 
 ans = ""
 while ans != "Exit":
     
     ans = input("You: ").strip().capitalize()
-    def get_response():
-        
-    
+    response = get_response(ans)
 
+    print(response)
     
 else:
     print("Bot: Goodbye! Have a great day!")
 
 
-'''client = OpenAI()
-    response = client.responses.create(model="gpt-5.6-luna", input=ans)
-    key = os.getenv("OPENAI_API_KEY")
-    print(f"Bot: {response.output_text}")'''
+
+
+"""if ans == ("Hello"):
+        ans = "Bot: How far G"
+    elif ans == "How far":
+        ans = "Bot: All good"
+    else:
+        ans = "Bot: I don't know how to respond to that."""
