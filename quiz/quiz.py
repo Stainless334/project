@@ -181,143 +181,118 @@ quiz_30 = {
     "Difficulty": "Medium"
 }
 question = [quiz, quiz_2, quiz_3, quiz_4, quiz_5, quiz_6, quiz_7, quiz_8, quiz_9, quiz_10, quiz_11, quiz_12, quiz_13, quiz_14, quiz_15, quiz_16, quiz_17, quiz_18, quiz_19, quiz_20, quiz_21, quiz_22, quiz_23, quiz_24, quiz_25, quiz_26, quiz_27, quiz_28, quiz_29, quiz_30]
-rep = "Yes"
-while rep == "Yes":
+#rep = "Yes"
+#while rep == "Yes":
     
 
-    def RunQuiz():
-
-
-
-
-            
-            filter_question, difficulty = FilterQuiz()
-            random.shuffle(filter_question)
-            time_limit = TimeLimit(difficulty)
-            score = SolveQuestion(filter_question, time_limit)
-
-            percent = CalcPercentage(score, filter_question)
-            message = Performance(percent)
-
-            FinalResult(score, len(filter_question), percent, message)
-
-    def FilterQuiz():
-        difficulty = input("Choose a difficulty level (Easy, Medium, Hard): ").strip().capitalize()
+def RunQuiz():
+        
+        filter_question, difficulty = FilterQuiz()
+        random.shuffle(filter_question)
+        time_limit = TimeLimit(difficulty)
+        score = SolveQuestion(filter_question, time_limit)
+        percent = CalcPercentage(score, filter_question)
+        message = Performance(percent)
+        FinalResult(score, len(filter_question), percent, message)
+def FilterQuiz():
+    difficulty = input("Choose a difficulty level (Easy, Medium, Hard): ").strip().capitalize()
+    while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
+        print("Invalid input!")
+        print("Please choose either 'Easy', 'Medium' or 'Hard'.")
+        difficulty = input("Try again: ").strip().capitalize()
+    filter_question = [q for q in question if q["Difficulty"] == difficulty]
+    while len(filter_question) == 0:
+        print(f"No questions available for {difficulty} difficulty.")
+        difficulty = input("Choose a different difficulty level (Easy, Medium, Hard): ").strip().capitalize()
         while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
             print("Invalid input!")
             print("Please choose either 'Easy', 'Medium' or 'Hard'.")
             difficulty = input("Try again: ").strip().capitalize()
         filter_question = [q for q in question if q["Difficulty"] == difficulty]
-        while len(filter_question) == 0:
-            print(f"No questions available for {difficulty} difficulty.")
-            difficulty = input("Choose a different difficulty level (Easy, Medium, Hard): ").strip().capitalize()
-            while difficulty != "Easy" and difficulty != "Medium" and difficulty != "Hard":
-                print("Invalid input!")
-                print("Please choose either 'Easy', 'Medium' or 'Hard'.")
-                difficulty = input("Try again: ").strip().capitalize()
-            filter_question = [q for q in question if q["Difficulty"] == difficulty]
-        return filter_question, difficulty
+    return filter_question, difficulty
+def TimeLimit(difficulty):
+    if difficulty == "Easy":
+        time_limit = 15
+    elif difficulty == "Medium":
+        time_limit = 15
+    elif difficulty == "Hard":
+        time_limit = 10
+    return time_limit
+def AskQuestion(i, display, filter_question, time_limit):
+    start_time = time.time()
+    print(f"Question: {i + 1}/{len(filter_question)}")
+    print(f"{display["Quest"]}")
+    options = list(display["Option"])
+    random.shuffle(options)
+    for ex, opt in enumerate(options):
+        print(f"{chr(65 + ex)}. {opt}")
+    ans = input("Your answer: ").strip().capitalize()
+    while ans != "A" and ans != "B" and ans != "C" and ans != "D":
+        print("Invalid Input!!")
+        print("Please choose options from 'A to D'.")
+        ans = input("Try again: ").strip().capitalize()
+    end_time = time.time()
+    time_taken = end_time - start_time
+    if ans == "A":
+        ans = 0
+    elif ans == "B":
+        ans = 1
+    elif ans == "C":
+        ans = 2
+    elif ans == "D":
+        ans = 3
+   
+    selected = (options)[ans]
+    if selected == (display["Ans"]) and time_taken <= time_limit:
+        print(f"Time taken: {time_taken:.2f} seconds")
+        print("Correct!!!")
+        return True
+    elif time_taken > time_limit:
+        print("Time's up!!")
+        print(f"You are supposed to answer within {time_limit} seconds.")
+        return False
+    else:
+        print("Wrong!!")
+        print(f"The correct answer is {(display["Ans"])}.")
+        return False
+def SolveQuestion(filter_question, time_limit):
+    score = 0
+    for i, display in enumerate(filter_question):
+        result = AskQuestion(i, display, filter_question, time_limit)
+        if result == True:
+            score += 1
+    return score
+def CalcPercentage(score, filter_question):
+    percent = round((score / len(filter_question)) * 100, 2)
+    return percent
+def Performance(percent):
+    if 100 >= percent >= 90:
+        percent = "Excellent!"
+    elif 90 > percent >= 70:
+        percent = "Great work!"
+    elif 70 > percent >= 50:
+        percent = "Good effort!"
+    elif percent < 50:
+        percent = "Keep practicing!"
+    return percent
+def FinalResult(score, total, percentage, message,):
+    print(f"Final Score: {score}/{total}")
+    print(percentage)
+    print(message)
+if __name__ == "__main__":
+    RunQuiz()
 
-    def TimeLimit(difficulty):
-        if difficulty == "Easy":
-            time_limit = 15
-        elif difficulty == "Medium":
-            time_limit = 15
-        elif difficulty == "Hard":
-            time_limit = 10
-        return time_limit
-
-    def AskQuestion(i, display, filter_question, time_limit):
-        start_time = time.time()
-        print(f"Question: {i + 1}/{len(filter_question)}")
-        print(f"{display["Quest"]}")
-        options = list(display["Option"])
-        random.shuffle(options)
-        for ex, opt in enumerate(options):
-            print(f"{chr(65 + ex)}. {opt}")
-
-        ans = input("Your answer: ").strip().capitalize()
-        while ans != "A" and ans != "B" and ans != "C" and ans != "D":
-
-            print("Invalid Input!!")
-            print("Please choose options from 'A to D'.")
-            ans = input("Try again: ").strip().capitalize()
-        end_time = time.time()
-        time_taken = end_time - start_time
-        if ans == "A":
-            ans = 0
-        elif ans == "B":
-            ans = 1
-        elif ans == "C":
-            ans = 2
-        elif ans == "D":
-            ans = 3
-       
-        selected = (options)[ans]
-        if selected == (display["Ans"]) and time_taken <= time_limit:
-            print(f"Time taken: {time_taken:.2f} seconds")
-            print("Correct!!!")
-            return True
-        elif time_taken > time_limit:
-            print("Time's up!!")
-            print(f"You are supposed to answer within {time_limit} seconds.")
-            return False
-        else:
-            print("Wrong!!")
-            print(f"The correct answer is {(display["Ans"])}.")
-            return False
-
-
-    def SolveQuestion(filter_question, time_limit):
-        score = 0
-        for i, display in enumerate(filter_question):
-            result = AskQuestion(i, display, filter_question, time_limit)
-            if result == True:
-                score += 1
-        return score
-
-
-    def CalcPercentage(score, filter_question):
-        percent = round((score / len(filter_question)) * 100, 2)
-        return percent
-
-
-    def Performance(percent):
-        if 100 >= percent >= 90:
-            percent = "Excellent!"
-        elif 90 > percent >= 70:
-            percent = "Great work!"
-        elif 70 > percent >= 50:
-            percent = "Good effort!"
-        elif percent < 50:
-            percent = "Keep practicing!"
-        return percent
-
-
-    def FinalResult(score, total, percentage, message,):
-        print(f"Final Score: {score}/{total}")
-        print(percentage)
-        print(message)
-    RunQuiz()  
     replay = input("Would you like to replay the quiz?: ").strip().capitalize()
-
-
-    while replay != "Yes" and replay != "No":
-        print("Invalid input!")
-        print("Please enter either 'Yes' or 'No'")
-        replay = input("Try again: ").strip().capitalize()
-
-    if rep == replay:
-        print("Alright!")
-        continue
-    elif replay == "No":
-        print("Thank you for playing!!")
-        break
-                
-    
-
-    
-
-#RunQuiz()     
-
+#while replay != "Yes" and replay != "No":
+ #   print("Invalid input!")
+  #  print("Please enter either 'Yes' or 'No'")
+   # replay = input("Try again: ").strip().capitalize()
+#if rep == replay:
+ #   print("Alright!")
+  #  continue
+#elif replay == "No":
+ #   print("Thank you for playing!!")
+  #  break
+if __name__ == "__main__":
+    RunQuiz()
 

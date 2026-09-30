@@ -2,19 +2,18 @@
 
 <h1>Quiz page</h1>
 
-<form method="POST" action="/quiz">    
-    <h3>What is the capital of France?</h3>
+<form method="POST" action="/quiz">
+    
+    <h3>{{ quest }}</h3>
+
+    {% for option in options %}
+         <input type="radio" id="{{option}}" name="option" value="{{option}}">
+        <label for="{{option}}">{{option}}<br>
+
+        </label> 
+    {% endfor %}<br>
 
 
-    <input type="radio" id="A" name="option" value="Abuja">
-        <label for="A">Abuja</label><br>
-    <input type="radio" id="B" name="option" value="Paris">
-        <label for="B">Paris</label><br>
-    <input type="radio" id="C" name="option" value="Tokyo">
-        <label for="C">Tokyo</label><br>
-    <input type="radio" id="D" name="option" value="London">
-        <label for="D">London</label>
-        <br><br>
     <button>Submit</button>
 </form>
 

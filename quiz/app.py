@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-#from quiz import question
+from flask import Flask, render_template, request, session
+import quiz 
 
 app = Flask(__name__)
 
@@ -16,11 +16,11 @@ def quest():
     message = ""
     if request.method == 'POST':
         action = request.form.get('option')
-        if action == "Paris":
+        if action == quiz.question[0]["Ans"]:
             message = "Correct!!"
         else:
-            message = f"Wrong!"
-    return render_template("quiz.html", message=message)
+            message = "Wrong!"
+    return render_template("quiz.html", message=message,quest=quiz.question[0]["Quest"], options=quiz.question[0]["Option"] )
 
 if __name__ == '__main__':
     app.run(debug=True)
