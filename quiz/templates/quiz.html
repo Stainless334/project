@@ -13,8 +13,14 @@
         </label> 
     {% endfor %}<br>
 
-
-    <button>NEXT</button>
+    <button type="submit" name="action" value="previous">PREVIOUS</button>
+    {% if final %}
+      <button type="submit" name="action" value="submit">SUBMIT</button>
+    {% else %}
+      <button type="submit" name="action" value="next">NEXT</button>
+    {% endif %}
+    
+    
 </form>
 
 {% if message %}

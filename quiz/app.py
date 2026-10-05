@@ -15,21 +15,46 @@ def home():
 @app.route("/quiz", methods=['GET', 'POST'])
 def quest():
     message = ""
-
-    if request.method == 'POST':
-        action = request.form.get('option')
-        if action == quiz.question[session["current_question"]]["Ans"]:
-            message = "Correct!!"
-        else:
-            message = "Wrong!"
-        if session["current_question"] != (len(quiz.question) - 1):
-            session["current_question"] += 1
-             
     if session.get("current_question") is None:
-            session["current_question"] = 0
+        session["current_question"] = 0
+    if session.get("answers") is None:
+        session["answers"] = {}
+    final = session["current_question"] == (len(quiz.question) - 1)
+    if request.method == 'POST':
+        select = request.form.get('action')
+        if select == 'previous':
+            if session["current_question"] > 0:        
+                session["current_question"] -= 1
+        elif select == 'next':
+
+            action = request.form.get('option')
+            session["answers"][str(session["current_question"])] = action
+            if session["current_question"] != (len(quiz.question) - 1):
+                session["current_question"] += 1
+        elif select == 'submit':
+            action = request.form.get('option')
+            session["answers"][str(session["current_question"])] = action
+            score = 0
+            for goal in session["answers"]:
+                if session["answers"][goal] == quiz.question[int(goal)]["Ans"]:
+                    score += 1
+       
+    
+    return render_template("quiz.html", message=message,quest=quiz.question[session["current_question"]]["Quest"], options=quiz.question[session["current_question"]]["Option"], final=final )
+
+@app.route("/result")
+def result():
+    return render_template("result.html")
+    
 
 
-    return render_template("quiz.html", message=message,quest=quiz.question[session["current_question"]]["Quest"], options=quiz.question[session["current_question"]]["Option"] )
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
