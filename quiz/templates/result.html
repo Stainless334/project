@@ -5,4 +5,16 @@
 
 <body>
     <h1>Quiz Result</h1>
+
+    <h2>Your score is: {{score}} / {{number}}</h2>
+    <h3>Your Percentage: {{percent}}</h3>
+    <h5>{{remark}}</h5>
+   
+
+
+
+    <br><br><br><br>
+    <form method="POST" action="/restart">
+        <button type="submit" name="restart" value="restart">PLAY AGAIN</button>
+    </form>
 </body>

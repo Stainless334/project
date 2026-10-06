@@ -1,27 +1,33 @@
 <!DOCTYPE html>
+<head>
+  <title>Quiz page</title>
+</head>
+<body>
 
-<h1>Quiz page</h1>
 
-<form method="POST" action="/quiz">
-    
-    <h3>{{ quest }}</h3>
-
-    {% for option in options %}
-         <input type="radio" id="{{option}}" name="option" value="{{option}}">
-        <label for="{{option}}">{{option}}<br>
-
-        </label> 
-    {% endfor %}<br>
-
-    <button type="submit" name="action" value="previous">PREVIOUS</button>
-    {% if final %}
-      <button type="submit" name="action" value="submit">SUBMIT</button>
-    {% else %}
-      <button type="submit" name="action" value="next">NEXT</button>
-    {% endif %}
-    
-    
-</form>
+  <h1>Quiz page</h1>
+  
+  <form method="POST" action="/quiz">
+      
+      <h3>{{ quest }}</h3>
+  
+      {% for option in options %}
+           <input type="radio" id="{{option}}" name="option" value="{{option}}">
+          <label for="{{option}}">{{option}}<br>
+          
+          </label> 
+      {% endfor %}<br>
+        
+      <button type="submit" name="action" value="previous">PREVIOUS</button>
+      {% if final %}
+        <button type="submit" name="action" value="submit">SUBMIT</button>
+      {% else %}
+        <button type="submit" name="action" value="next">NEXT</button>
+      {% endif %}
+        
+        
+  </form>
+</body>
 
 {% if message %}
   <p>{{ message }}</p>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 import quiz 
 
 app = Flask(__name__)
@@ -38,16 +38,38 @@ def quest():
             for goal in session["answers"]:
                 if session["answers"][goal] == quiz.question[int(goal)]["Ans"]:
                     score += 1
-       
+            session["score"] = score
+            return redirect(url_for("result"))
     
     return render_template("quiz.html", message=message,quest=quiz.question[session["current_question"]]["Quest"], options=quiz.question[session["current_question"]]["Option"], final=final )
-
+    
 @app.route("/result")
 def result():
-    return render_template("result.html")
+    score = session.get("score")
+    number = len(quiz.question)
+    percent = round((score / number) * 100, 2)
+    remark = ""
+    if 100 >= percent <= 90:
+        remark = "Excellent! 🌟"
+    elif 90 > percent <= 70:
+        remark = "Good job! 👍"
+    elif 70 > percent <= 50:
+        remark = "Keep practicing 💪"
+    elif percent > 50:
+        remark = "Study more 📚"
+    """90–100% → Excellent! 🌟
+70–89% → Good job! 👍
+50–69% → Keep practicing 💪
+Below 50% → Study more 📚"""
+    return render_template("result.html", score=score, number=number, percent=percent, remark=remark)
     
+@app.route("/restart", methods=['POST'])
+def restart():
+    session.pop("answers", None)
+    session.pop("score", None)
+    session.pop("current_question", None)
 
-
+    return redirect(url_for("quest"))
 
 
 
