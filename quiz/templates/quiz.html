@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<head>
-  <title>Quiz page</title>
-</head>
-<body>
+<html>
+  <head>
+    <title>Quiz page</title>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+  </head>
+  <body>
 
+    <div id="timer">10:00</div>
+    <h1>Quiz page</h1>
 
-  <h1>Quiz page</h1>
-  
-  <form method="POST" action="/quiz">
-      
-      <h3>{{ quest }}</h3>
-  
-      {% for option in options %}
-           <input type="radio" id="{{option}}" name="option" value="{{option}}">
-          <label for="{{option}}">{{option}}<br>
+    <form method="POST" action="/quiz">
+
+        <h3>{{ quest }}</h3>
+    
+        {% for option in options %}
+             <input type="radio" id="{{option}}" name="option" value="{{option}}">
+            <label for="{{option}}">{{option}}<br>
+            
+            </label> 
+        {% endfor %}<br>
           
-          </label> 
-      {% endfor %}<br>
-        
-      <button type="submit" name="action" value="previous">PREVIOUS</button>
-      {% if final %}
-        <button type="submit" name="action" value="submit">SUBMIT</button>
-      {% else %}
-        <button type="submit" name="action" value="next">NEXT</button>
-      {% endif %}
-        
-        
-  </form>
-</body>
+        <button type="submit" name="action" value="previous">PREVIOUS</button>
+        {% if final %}
+          <button type="submit" name="action" value="submit">SUBMIT</button>
+        {% else %}
+          <button type="submit" name="action" value="next">NEXT</button>
+        {% endif %}
 
-{% if message %}
-  <p>{{ message }}</p>
-{% endif %}
+          
+    </form>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+
+  </body>
+
+</html>
