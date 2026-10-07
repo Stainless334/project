@@ -1,0 +1,8 @@
+ #timer{
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    background-color: skyblue;
+    border-color: azure;
+    border-radius: 5px;
+}
