@@ -1,0 +1,111 @@
+import time
+"""
+
+Expense_1 = {
+    "Name": "School fees",
+    "Amount": 35000,
+    "Category": "Children"
+}
+Expense_2 = {
+    "Name": "Lunch",
+    "Amount": 2500,
+    "Category": "Food"
+}
+
+
+the_list = [Expense_1, Expense_2]
+
+
+        # ADD EXPENSE
+print("Enter name of expense.")
+name = input()
+
+print("What is the amount?")
+amount = input()
+
+print("Enter expense category.")
+cat = input()
+
+Expense_n = {
+    "Name": name,
+    "Amount": float(amount),
+    "Category": cat
+}
+the_list.append(Expense_n)
+
+for view in (the_list):
+    print(*view.values())
+  
+  # VIEW TOTAL
+total_amount = 0
+for total in the_list:
+    total_amount += total["Amount"]
+
+print(total_amount)
+
+expenses:
+
+Expense_1 = {
+    "Name": "School fees",
+    "Amount": 35000,
+    "Category": https://www.blender.org"Children"
+}
+Expense_2 = {
+    "Name": "Lunch",
+    "Amount": 2500,
+    "Category": "Food"
+}
+"""
+
+
+
+
+"""if ans == "A":
+                
+                    a == 0
+            elif ans == "B":
+                for b in range(len(display["Option"])):
+                    b == 1
+            elif ans == "C":
+                for c in range(len(display["Option"])):
+                    c == 2
+            elif ans == "D":
+                for d in range(len(display["Option"])):
+                    d == 3
+                    
+"""
+"ur-line report with labels Customer, Subtotal, Tax, and Total. Round subtotal, tax, and total to 2 decimal places."
+
+
+"""fruits = ["Orange", "Apple", "Cherry"]
+for i, one in enumerate(fruits):
+    print(f"{i + 1} {one}")
+   
+
+print(ord("a"))  #rem = int(input("Choose the number you want to delete: "))
+       # rem = rem - 1
+      #  for ex in range(len(expenses)):
+          #  if rem == ex:
+           #total_amount = 0
+        #for total in 
+        # 
+        # 
+        # 
+        # #print(f"Final score: {score}/{len(question)}")
+                #print(percent)
+                #print(message)
+                #
+                
+                """
+a = time.localtime()
+print(a)
+print("https://www.blender.org/wp-content/uploads/2019/07/hero_p31_screenshot-1280x720.jpg?x12104")
+ #print(get_response(ans))
+ #key = os.getenv("OPENAI_API_KEY")
+#print(f"Bot: {response.output_text}")
+"""client = OpenAI()
+    response = client.responses.create(model="gpt-5.6-luna", input=ans)
+    
+    #import os
+from openai import OpenAI
+    """

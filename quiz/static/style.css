@@ -1,0 +1,149 @@
+/* STAINLESS Quiz - dark neon theme */
+:root {
+  --ink: #05020F;
+  --night: #0D0623;
+  --panel: rgba(18, 9, 46, 0.82);
+  --violet: #8B5CF6;
+  --magenta: #FF2E93;
+  --cyan: #22D3EE;
+  --text: #F5F1FF;
+  --muted: #B6A9DB;
+  --radius: 28px;
+  --glow: 0 0 0 2px var(--magenta), 0 0 22px 4px rgba(255, 46, 147, .55), 0 0 60px 10px rgba(139, 92, 246, .35);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { min-height: 100%; }
+body {
+  min-height: 100vh;
+  font-family: "Sora", "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  text-align: center;
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(139,92,246,.45), transparent 60%),
+    radial-gradient(800px 500px at 100% 110%, rgba(255,46,147,.35), transparent 60%),
+    var(--ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 32px 16px;
+}
+/* Question-mark wallpaper, drawn as an inline SVG tile (no image file needed) */
+body.quiz-bg {
+  background:
+    radial-gradient(900px 500px at 15% -10%, rgba(139,92,246,.40), transparent 60%),
+    radial-gradient(800px 500px at 100% 110%, rgba(255,46,147,.30), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><g font-family='Georgia,serif' font-weight='700'><text x='18' y='70' font-size='56' fill='%238B5CF6' fill-opacity='.30' transform='rotate(-14 18 70)'>?</text><text x='130' y='60' font-size='34' fill='%23FF2E93' fill-opacity='.28' transform='rotate(18 130 60)'>?</text><text x='80' y='150' font-size='72' fill='%2322D3EE' fill-opacity='.18' transform='rotate(8 80 150)'>?</text><text x='175' y='190' font-size='42' fill='%238B5CF6' fill-opacity='.30' transform='rotate(-22 175 190)'>?</text><text x='10' y='205' font-size='30' fill='%23FF2E93' fill-opacity='.22' transform='rotate(12 10 205)'>?</text></g></svg>"),
+    var(--ink);
+}
+h1, h2 { line-height: 1.2; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 800;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--magenta));
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+h2 { font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-weight: 700; }
+p.lead { color: var(--muted); margin: 12px auto 28px; max-width: 46ch; line-height: 1.6; }
+
+.card {
+  width: 100%; max-width: 640px;
+  background: var(--panel);
+  border: 1px solid rgba(139,92,246,.45);
+  border-radius: var(--radius);
+  padding: clamp(24px, 5vw, 44px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px rgba(139,92,246,.25);
+}
+.brand { font-weight: 800; letter-spacing: .02em; color: var(--cyan); margin-bottom: 18px; }
+
+/* Forms */
+.field { margin-bottom: 20px; }
+label.field-label { display: block; margin-bottom: 8px; color: var(--muted); font-size: .95rem; }
+select, input[type="number"], input[type="text"], input:not([type]) {
+  width: 100%; padding: 14px 18px; text-align: center; text-align-last: center;
+  font: inherit; color: var(--text);
+  background: rgba(5,2,15,.8);
+  border: 1px solid rgba(139,92,246,.55);
+  border-radius: 999px; outline: none;
+  transition: box-shadow .2s, border-color .2s;
+}
+select:focus, input[type="number"]:focus, input[type="text"]:focus, input:not([type]):focus { border-color: var(--magenta); box-shadow: var(--glow); }
+select option { background: var(--night); }
+
+/* Buttons */
+.btn {
+  display: inline-block; cursor: pointer; font: inherit; font-weight: 700; color: #fff;
+  padding: 14px 34px; border: 0; border-radius: 999px; text-decoration: none;
+  background: linear-gradient(90deg, var(--violet), var(--magenta));
+  box-shadow: 0 0 18px rgba(139,92,246,.55);
+  transition: transform .15s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 28px 4px rgba(255,46,147,.55); }
+.btn:active, .btn:focus-visible { outline: none; box-shadow: var(--glow); transform: scale(.98); }
+.btn.ghost { background: transparent; border: 1px solid var(--violet); box-shadow: none; }
+.btn.ghost:hover { box-shadow: 0 0 22px rgba(139,92,246,.6); }
+.btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+
+/* Flash messages */
+.flash { margin-bottom: 20px; padding: 12px 18px; border-radius: 999px;
+  background: rgba(255,46,147,.15); border: 1px solid var(--magenta); color: #FFD3E8; }
+
+/* Quiz page */
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  color: var(--muted); font-size: .95rem; margin-bottom: 12px; }
+.timer { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--cyan);
+  padding: 6px 16px; border: 1px solid var(--cyan); border-radius: 999px; }
+.timer.low { color: var(--magenta); border-color: var(--magenta); }
+.progress { height: 8px; border-radius: 999px; background: rgba(255,255,255,.1); overflow: hidden; margin-bottom: 30px; }
+.progress span { display: block; height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--magenta)); box-shadow: 0 0 12px var(--magenta); }
+.question { margin-bottom: 28px; }
+.options { display: grid; gap: 14px; }
+.option { position: relative; display: block; cursor: pointer; padding: 16px 22px;
+  border: 1px solid rgba(139,92,246,.5); border-radius: 999px;
+  background: rgba(5,2,15,.7); transition: box-shadow .2s, border-color .2s, transform .1s; }
+.option:hover { border-color: var(--cyan); }
+.option:active { transform: scale(.985); }
+.option:has(input:checked), .option:focus-within { border-color: var(--magenta); box-shadow: var(--glow); background: rgba(255,46,147,.12); }
+
+/* Result page */
+.score { font-size: clamp(3rem, 12vw, 5.5rem); font-weight: 800; margin: 8px 0;
+  color: var(--text); text-shadow: 0 0 24px var(--violet), 0 0 48px var(--magenta); }
+.percent { font-size: 1.4rem; color: var(--cyan); margin-bottom: 10px; }
+.remark { font-size: 1.3rem; margin-top: 6px; }
+
+@media (max-width: 480px) { .option { border-radius: 24px; } .topbar { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- Added: text input, radios and buttons (work even on unclassed markup) ---------- */
+input[type="text"], input:not([type]) { text-align: center; }
+input::placeholder { color: #7f72a8; }
+
+/* Custom glowing radio buttons */
+input[type="radio"] {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; flex: none; margin: 0 14px 0 0;
+  border: 2px solid var(--violet); border-radius: 50%;
+  background: rgba(5,2,15,.9); cursor: pointer; vertical-align: middle;
+  display: inline-grid; place-content: center;
+  transition: box-shadow .2s, border-color .2s;
+}
+input[type="radio"]::before {
+  content: ""; width: 12px; height: 12px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
+  transform: scale(0); transition: transform .15s;
+}
+input[type="radio"]:checked { border-color: var(--magenta); box-shadow: 0 0 14px 3px rgba(255,46,147,.7); }
+input[type="radio"]:checked::before { transform: scale(1); }
+input[type="radio"]:focus-visible { outline: none; box-shadow: var(--glow); }
+.option { display: flex; align-items: center; justify-content: center; text-align: center; }
+
+/* Buttons: Next, Previous, Submit, Start, etc. */
+button, input[type="submit"] {
+  cursor: pointer; font: inherit; font-weight: 700; color: #fff;
+  padding: 14px 38px; border: 0; border-radius: 999px;
+  background: linear-gradient(90deg, var(--violet), var(--magenta));
+  box-shadow: 0 0 18px rgba(139,92,246,.55);
+  transition: transform .15s, box-shadow .2s;
+}
+button:hover, input[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 0 30px 5px rgba(255,46,147,.6); }
+button:active, button:focus-visible, input[type="submit"]:active { outline: none; transform: scale(.97); box-shadow: var(--glow); }
+button[value="previous"] { background: transparent; border: 2px solid var(--violet); box-shadow: none; }
+button[value="previous"]:hover { box-shadow: 0 0 24px 4px rgba(139,92,246,.7); }
+button[value="submit"] { background: linear-gradient(90deg, var(--cyan), var(--violet)); box-shadow: 0 0 20px rgba(34,211,238,.55); }
+button[value="submit"]:hover { box-shadow: 0 0 32px 6px rgba(34,211,238,.65); }

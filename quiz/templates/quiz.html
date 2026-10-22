@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Question {{ current_number }} | STAINLESS Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="quiz-bg">
+  <main class="card">
+    <div class="topbar">
+      <span>Question {{ current_number }} of {{ total_questions }}</span>
+      <span class="timer" id="timer">10:00</span>
+    </div>
+    <div class="progress"><span id="progress-bar" data-progress="{{ progress }}"></span></div>
+    {% if message %}<div class="flash">{{ message }}</div>{% endif %}
+
+    <form method="post" id="quiz-form">
+      <h2 class="question">{{ quest }}</h2>
+      <div class="options">
+        {% for option in options %}
+        <label class="option">
+          <input type="radio" name="option" value="{{ option }}">
+          {{ option }}
+        </label>
+        {% endfor %}
+      </div>
+
+      <div class="btn-row">
+        <button class="btn ghost" type="submit" name="action" value="previous">Previous</button>
+        {% if final %}
+          <button class="btn" type="submit" name="action" value="submit">Submit quiz</button>
+        {% else %}
+          <button class="btn" type="submit" name="action" value="next">Next</button>
+        {% endif %}
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // Timer keeps running across page reloads by saving an absolute deadline.
+    const DURATION = 600; // seconds
+    const timerEl = document.getElementById("timer");
+    let deadline = null;
+    try { deadline = Number(sessionStorage.getItem("deadline")) || null; } catch (e) {}
+    if (!deadline) {
+      deadline = Date.now() + DURATION * 1000;
+      try { sessionStorage.setItem("deadline", deadline); } catch (e) {}
+    }
+
+    function tick() {
+      const left = Math.max(0, Math.round((deadline - Date.now()) / 1000));
+      const m = String(Math.floor(left / 60)).padStart(2, "0");
+      const s = String(left % 60).padStart(2, "0");
+      timerEl.textContent = m + ":" + s;
+      timerEl.classList.toggle("low", left <= 60);
+      if (left === 0) {
+        clearInterval(id);
+        // Time is up: submit the quiz with whatever has been answered.
+        const form = document.getElementById("quiz-form");
+        const input = document.createElement("input");
+        input.type = "hidden"; input.name = "action"; input.value = "submit";
+        form.appendChild(input);
+        form.submit();
+      }
+    }
+    const id = setInterval(tick, 1000);
+    tick();
+    const bar = document.getElementById("progress-bar");
+    bar.style.width = bar.dataset.progress + "%";
+  </script>
+</body>
+</html>
