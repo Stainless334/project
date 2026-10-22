@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="quiz-bg">
+  <div id="quiz-config" data-duration="{{ duration_seconds }}"></div>
   <main class="card">
     <div class="topbar">
       <span>Question {{ current_number }} of {{ total_questions }}</span>
@@ -41,7 +42,8 @@
 
   <script>
     // Timer keeps running across page reloads by saving an absolute deadline.
-    const DURATION = 600; // seconds
+    const config = document.getElementById("quiz-config");
+    const DURATION = Number(config.dataset.duration);
     const timerEl = document.getElementById("timer");
     let deadline = null;
     try { deadline = Number(sessionStorage.getItem("deadline")) || null; } catch (e) {}

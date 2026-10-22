@@ -1,44 +1,37 @@
-// const timer = document.getElementById("timer");
-// let timeLeft = 600;
-// setInterval(function() {
-//     const minutes = Math.floor(timeLeft/60);
-//     const seconds = timeLeft%60;
-//     timer.textContent = `Time Remaining: ${minutes}:${String(seconds).padStart(2, "0")}`;
-//     timeLeft -= 1;
-    
-    
-// }, 1000);
+document.addEventListener("DOMContentLoaded", function () {
+    const quizForm = document.getElementById("quiz-form");
+    const loadingScreen = document.getElementById("loading-screen");
 
-const timer = document.getElementById("timer");
-
-const TIMER_DURATION = 600;
-
-// Restore the remaining time, or start at 10 minutes.
-let timeLeft = sessionStorage.getItem("timeLeft");
-
-if (timeLeft === null) {
-    timeLeft = TIMER_DURATION;
-} else {
-    timeLeft = Number(timeLeft);
-}
-
-const interval = setInterval(function() {
-    if (timeLeft <= 0) {
-        clearInterval(interval);
-        sessionStorage.removeItem("timeLeft");
-        timer.textContent = "00:00";
-
-        // TODO: Handle quiz timeout here.
-        return;
+    if (quizForm && loadingScreen) {
+        quizForm.addEventListener("submit", function () {
+            loadingScreen.classList.add("active");
+        });
     }
+});
 
-    timeLeft--;
+const durationRadios = document.querySelectorAll(
+    'input[name="duration"]'
+);
 
-    sessionStorage.setItem("timeLeft", timeLeft);
+const customDuration = document.getElementById("custom-duration");
 
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
+if (customDuration && durationRadios.length > 0) {
 
-    timer.textContent =
-        `Time Remaining: ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-}, 1000);
+    customDuration.addEventListener("input", function () {
+        if (this.value !== "") {
+            durationRadios.forEach(function (radio) {
+                radio.checked = false;
+            });
+        } else {
+            document.querySelector(
+                'input[name="duration"][value="5"]'
+            ).checked = true;
+        }
+    });
+
+    durationRadios.forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            customDuration.value = "";
+        });
+    });
+}

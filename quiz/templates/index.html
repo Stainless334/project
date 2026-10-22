@@ -10,17 +10,17 @@
 </head>
 <body>
   <h1>STAINLESS Quiz</h1>
-  <p class="lead">Pick a topic, choose your level, and let AI write a fresh quiz for you.</p>
+  <p class="lead">PUSH PAST YOUR LIMITS!!!<br>Pick a topic, choose your level, select a duration  and start the quiz strong.</p>
 
   <main class="card">
     {% with messages = get_flashed_messages() %}
       {% for m in messages %}<div class="flash">{{ m }}</div>{% endfor %}
     {% endwith %}
 
-    <form action="{{ url_for('quest') }}" method="get">
+    <form id="quiz-form" action="{{ url_for('quest') }}" method="get">
       <div class="field">
         <label class="field-label" for="topic">Topic</label>
-        <input type="text" id="topic" name="topic" placeholder="e.g. Python, World History" required>
+        <input type="text" id="topic" name="topic" placeholder="e.g. Calculus, World History" required>
       </div>
       <div class="field">
         <label class="field-label" for="level">Difficulty</label>
@@ -31,12 +31,72 @@
         </select>
       </div>
       <div class="field">
-        <label class="field-label" for="number">Number of questions (5 to 25)</label>
-        <input type="number" id="number" name="number" min="5" max="25" value="5" required>
+        <label class="field-label" for="number">Number of questions (5 to 30)</label>
+        <input type="number" id="number" name="number" min="5" max="30" value="5" required>
+      </div>
+      <!-- Quiz Duration Selector -->
+      <div class="duration-section">
+          <h3>⏱️ Choose Your Quiz Duration</h3>
+          <p>How much time do you need?</p>
+      
+          <div class="duration-options">
+          
+              <label class="duration-card">
+                  <input type="radio" name="duration" value="5" checked>
+                  <span>⚡</span>
+                  <strong>5 Minutes</strong>
+                  <small>Quick Quiz</small>
+              </label>
+            
+              <label class="duration-card">
+                  <input type="radio" name="duration" value="10">
+                  <span>🔥</span>
+                  <strong>10 Minutes</strong>
+                  <small>Standard Quiz</small>
+              </label>
+            
+              <label class="duration-card">
+                  <input type="radio" name="duration" value="15">
+                  <span>🚀</span>
+                  <strong>15 Minutes</strong>
+                  <small>Extended Quiz</small>
+              </label>
+            
+              <label class="duration-card">
+                  <input type="radio" name="duration" value="30">
+                  <span>👑</span>
+                  <strong>30 Minutes</strong>
+                  <small>Challenge Mode</small>
+              </label>
+            
+          </div>
+        
+          <div class="custom-duration">
+              <label for="custom-duration">
+                  Or enter your own duration (1-180 minutes)
+              </label>
+            
+              <input
+                  type="number"
+                  id="custom-duration"
+                  name="custom_duration"
+                  min="1"
+                  max="180"
+                  placeholder="e.g. 20"
+              >
+          </div>
       </div>
       <div class="btn-row"><button class="btn" type="submit">Start quiz</button></div>
     </form>
+    <div id="loading-screen" class="loading-screen">
+      <div class="loader-content">
+        <div class="loader"></div>
+        <h2>Loading questions...</h2>
+        <p>Please wait!</p>
+      </div>
+    </div>
   </main>
   <script>try { sessionStorage.removeItem("deadline"); } catch (e) {}</script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
