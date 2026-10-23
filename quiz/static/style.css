@@ -62,7 +62,7 @@ select, input[type="number"], input[type="text"], input:not([type]) {
   border-radius: 999px; outline: none;
   transition: box-shadow .2s, border-color .2s;
 }
-select:focus, input[type="number"]:focus, input[type="text"]:focus, input:not([type]):focus { border-color: var(--magenta); box-shadow: var(--glow); }
+select:focus, input[type="number"]:focus, input[type="text"]:focus, input:not([type]):focus { border-color: var(--magenta); box-shadow: var(--ink); }
 select option { background: var(--night); }
 
 /* Buttons */
@@ -70,10 +70,10 @@ select option { background: var(--night); }
   display: inline-block; cursor: pointer; font: inherit; font-weight: 700; color: #fff;
   padding: 14px 34px; border: 0; border-radius: 999px; text-decoration: none;
   background: linear-gradient(90deg, var(--violet), var(--magenta));
-  box-shadow: 0 0 18px rgba(139,92,246,.55);
+  box-shadow: 0 0 18px rgba(119, 67, 224, 0.55);
   transition: transform .15s, box-shadow .2s;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 0 28px 4px rgba(255,46,147,.55); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 28px 4px rgba(59, 12, 35, 0.55); }
 .btn:active, .btn:focus-visible { outline: none; box-shadow: var(--glow); transform: scale(.98); }
 .btn.ghost { background: transparent; border: 1px solid var(--violet); box-shadow: none; }
 .btn.ghost:hover { box-shadow: 0 0 22px rgba(139,92,246,.6); }
@@ -81,7 +81,7 @@ select option { background: var(--night); }
 
 /* Flash messages */
 .flash { margin-bottom: 20px; padding: 12px 18px; border-radius: 999px;
-  background: rgba(255,46,147,.15); border: 1px solid var(--magenta); color: #FFD3E8; }
+  background: rgba(241, 115, 176, 0.15); border: 1px solid var(--magenta); color: #FFD3E8; }
 
 /* Quiz page */
 .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px;
@@ -99,7 +99,7 @@ select option { background: var(--night); }
   background: rgba(5,2,15,.7); transition: box-shadow .2s, border-color .2s, transform .1s; }
 .option:hover { border-color: var(--cyan); }
 .option:active { transform: scale(.985); }
-.option:has(input:checked), .option:focus-within { border-color: var(--magenta); box-shadow: var(--glow); background: rgba(255,46,147,.12); }
+.option:has(input:checked), .option:focus-within { border-color: var(--magenta); box-shadow: var(--muted); background: rgba(255,46,147,.12); }
 
 /* Result page */
 .score { font-size: clamp(3rem, 12vw, 5.5rem); font-weight: 800; margin: 8px 0;
@@ -112,14 +112,14 @@ select option { background: var(--night); }
 
 /* ---------- Added: text input, radios and buttons (work even on unclassed markup) ---------- */
 input[type="text"], input:not([type]) { text-align: center; }
-input::placeholder { color: #7f72a8; }
+input::placeholder { color: #887ea8; }
 
 /* Custom glowing radio buttons */
 input[type="radio"] {
   -webkit-appearance: none; appearance: none;
   width: 24px; height: 24px; flex: none; margin: 0 14px 0 0;
   border: 2px solid var(--violet); border-radius: 50%;
-  background: rgba(5,2,15,.9); cursor: pointer; vertical-align: middle;
+  background: rgba(11, 9, 17, 0.9); cursor: pointer; vertical-align: middle;
   display: inline-grid; place-content: center;
   transition: box-shadow .2s, border-color .2s;
 }
