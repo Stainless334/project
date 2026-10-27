@@ -8,7 +8,7 @@ load_dotenv()
 
 
 client = OpenAI(
-    base_url="https://router.huggingface.co/v1"
+    base_url="https://router.huggingface.co/v1",
     api_key=os.getenv("HF_TOKEN")
 )
 
