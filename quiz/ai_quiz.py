@@ -39,7 +39,7 @@ def generate_questions(topic, level, number):
     """
 
     response = client.chat.completions.create(
-        model="Qwen/Qwen3.8-27B",
+        model="cutycat2000x/MeowGPT-2.5",
         messages=[
             {
                 "role": "system",
