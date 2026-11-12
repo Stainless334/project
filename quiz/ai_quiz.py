@@ -8,8 +8,8 @@ load_dotenv()
 
 
 client = OpenAI(
-    base_url="https://router.huggingface.co/v1",
-    api_key=os.getenv("HF_TOKEN")
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OP_TOKEN")
 )
 
 def generate_questions(topic, level, number):
@@ -39,7 +39,7 @@ def generate_questions(topic, level, number):
     """
 
     response = client.chat.completions.create(
-        model="cutycat2000x/MeowGPT-2.5",
+        model="openrouter/free",
         messages=[
             {
                 "role": "system",
